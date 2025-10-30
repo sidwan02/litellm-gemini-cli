@@ -311,8 +311,11 @@ def generate_content(
             **kwargs,
         )
 
+        print("Got here.")
+
         # Check if we should use the adapter (when provider config is None)
         if setup_result.generate_content_provider_config is None:
+            print("Using adapter for generate_content call")
             # Use the adapter to convert to completion format
             return GenerateContentToCompletionHandler.generate_content_handler(
                 model=model,
@@ -341,6 +344,8 @@ def generate_content(
             client=kwargs.get("client"),
             litellm_metadata=kwargs.get("litellm_metadata", {}),
         )
+
+        print("also here")
 
         return response
     except Exception as e:
