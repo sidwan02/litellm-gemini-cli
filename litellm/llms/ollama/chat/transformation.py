@@ -282,6 +282,7 @@ class OllamaChatConfig(BaseConfig):
         headers: dict,
     ) -> dict:
         stream = optional_params.pop("stream", False)
+        print("stream: ", stream)
         format = optional_params.pop("format", None)
         keep_alive = optional_params.pop("keep_alive", None)
         think = optional_params.pop("think", None)
@@ -295,7 +296,9 @@ class OllamaChatConfig(BaseConfig):
                 m, BaseModel
             ):  # avoid message serialization issues - https://github.com/BerriAI/litellm/issues/5319
                 m = m.model_dump(exclude_none=True)
+            print("m: ", m)
             tool_calls = m.get("tool_calls")
+            print("tool_calls:", tool_calls)
             if tool_calls is not None and isinstance(tool_calls, list):
                 new_tools: List[OllamaToolCall] = []
                 for tool in tool_calls:
@@ -367,6 +370,7 @@ class OllamaChatConfig(BaseConfig):
         api_key: Optional[str] = None,
         json_mode: Optional[bool] = None,
     ) -> ModelResponse:
+        print("In ollama transform_response")
         ## LOGGING
         logging_obj.post_call(
             input=messages,

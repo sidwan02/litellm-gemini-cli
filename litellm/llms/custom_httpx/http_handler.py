@@ -303,11 +303,6 @@ class AsyncHTTPHandler:
                 timeout = self.timeout
 
             _headers = headers.copy() if headers is not None else {}
-            if stream:
-                _headers["Transfer-Encoding"] = "chunked"
-                _headers["Content-Type"] = "text/event-stream"
-                if "Content-Length" in _headers:
-                    del _headers["Content-Length"]
 
             req = self.client.build_request(
                 "POST",

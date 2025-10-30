@@ -1,13 +1,26 @@
 model_list:
-  - model_name: gemini/*
+  # For no-op proxy
+  # - model_name: gemini/*
+  #   litellm_params:
+  #     model: gemini/*
+  #     api_key: AIzaSyA80y3HYIyqtPE5Db2RmLHEGE917ddIfWM
+  # For local agent
+  - model_name: 'gemma3n:e2b'
     litellm_params:
-      model: gemini/*
-      api_key: AIzaSyA80y3HYIyqtPE5Db2RmLHEGE917ddIfWM
+      model: 'ollama_chat/gemma3n:e2b'
+      api_base: 'http://localhost:11434'
+    model_info:
+      # tools should be injected into prompt
+      supports_function_calling: false
 
 router_settings:
-  model_group_alias:
-    {
-      'gemini-2.5-pro': 'gemini/gemini-2.5-pro',
-      'gemini-2.5-flash': 'gemini/gemini-2.5-flash',
-      'gemini-2.5-flash-lite': 'gemini/gemini-2.5-flash-lite',
+  model_group_alias: {
+      # For no-op proxy
+      # 'gemini-2.5-pro': 'gemini/gemini-2.5-pro',
+      # 'gemini-2.5-flash': 'gemini/gemini-2.5-flash',
+      # 'gemini-2.5-flash-lite': 'gemini/gemini-2.5-flash-lite',
+      # For local agent
+      'gemini-2.5-pro': 'gemma3n:e2b',
+      'gemini-2.5-flash': 'gemma3n:e2b',
+      'gemini-2.5-flash-lite': 'gemma3n:e2b',
     }
